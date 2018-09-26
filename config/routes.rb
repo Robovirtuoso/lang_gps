@@ -6,5 +6,9 @@ Rails.application.routes.draw do
     root 'dashboard#index', as: :authenticated_root
   end
 
+  namespace :api do
+    resources :language_users
+  end
+
   root to: "home#index"
 end

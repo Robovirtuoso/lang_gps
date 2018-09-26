@@ -10,8 +10,11 @@ gem 'puma', '~> 3.11'
 
 # Assets
 gem 'sass-rails', '~> 5.0'
+gem 'coffee-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
+gem 'jquery-rails'
+gem 'lodash-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -23,6 +26,9 @@ group :development, :test do
   gem 'pry'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+
+  # JS Test Runner
+  gem 'teaspoon-mocha'
 end
 
 group :development do
@@ -32,6 +38,13 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'faker'
+  gem "selenium-webdriver"
 end
 
 
