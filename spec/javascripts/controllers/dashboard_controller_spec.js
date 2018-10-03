@@ -1,5 +1,6 @@
 //= require language_users
 //= require controllers/dashboard_controller
+//= require bootstrap
 
 describe("DashboardController", () => {
 
@@ -29,6 +30,12 @@ describe("DashboardController", () => {
   });
 
   describe("validateLanguage(data)", () => {
+    fixture.preload("test_form.html", "test_modal.html");
+
+    beforeEach(() => {
+      this.fixtures = fixture.load("test_form.html", "test_modal.html", true);
+    });
+
     it("returns true when data is present", () => {
       let cont = new Controllers.DashboardController();
       let data = [{ name: 'French', id: 1 }];
@@ -37,6 +44,8 @@ describe("DashboardController", () => {
     });
 
     it("opens #language-form modal when no data is present", () => {
+      $('.modal').prop('id', 'language-form');
+
       let cont = new Controllers.DashboardController();
       let exp = sinon.mock(cont.$modal).expects("modal");
 

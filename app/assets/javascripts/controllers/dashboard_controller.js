@@ -18,6 +18,14 @@ Controllers.DashboardController = class DashboardController {
       return true;
     } else {
       this.$modal.modal();
+
+      new ButtonState({
+        $el: $('[type="submit"]'),
+        // checkbox type specified because rails creates a hidden
+        // input field with the same name as the other checkbox inputs
+        $input: $('[type="checkbox"][name="language_user[language_id][]"]')
+      }).addObservers();
     }
   }
+
 }
