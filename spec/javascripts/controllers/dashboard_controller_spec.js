@@ -1,12 +1,11 @@
 //= require language_users
 //= require controllers/dashboard_controller
 
-
 describe("DashboardController", () => {
-  before(() => { this.server = sinon.fakeServer.create(); });
-  after(() => { this.server.restore(); });
 
   describe("render()", () => {
+    before(() => { this.server = sinon.fakeServer.create(); });
+    after(() => { this.server.restore(); });
 
     it("forwards server data to a callback", () => {
       let cont = new Controllers.DashboardController();
@@ -27,6 +26,24 @@ describe("DashboardController", () => {
       exp.verify();
     });
 
+  });
+
+  describe("validateLanguage(data)", () => {
+    it("returns true when data is present", () => {
+      let cont = new Controllers.DashboardController();
+      let data = [{ name: 'French', id: 1 }];
+
+      expect(cont.validateLanguage(data)).to.equal(true);
+    });
+
+    it("opens #language-form modal when no data is present", () => {
+      let cont = new Controllers.DashboardController();
+      let exp = sinon.mock(cont.$modal).expects("modal");
+
+      cont.validateLanguage([]);
+
+      exp.verify();
+    });
   });
 
 });

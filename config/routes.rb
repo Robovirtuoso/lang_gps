@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :dashboard, only: [:index]
+  resources :language_users
 
   authenticated :user do
     root 'dashboard#index', as: :authenticated_root

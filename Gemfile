@@ -9,12 +9,17 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 
 # Assets
+# CSS
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap', '~> 4.1.3'
+
+# JS
 gem 'coffee-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
 gem 'jquery-rails'
 gem 'lodash-rails'
+gem 'sprockets-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -45,6 +50,7 @@ group :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker'
   gem "selenium-webdriver"
+  gem 'rails-controller-testing'
 end
 
 

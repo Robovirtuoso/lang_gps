@@ -6,7 +6,7 @@ describe("LanguageUsers", () => {
   after(() => { this.server.restore(); });
 
   describe("fetch()", () => {
-    it("calls the server for languages based on user id", () => {
+    it("calls the server for languages for current_user", () => {
       let lang = new LanguageUsers();
 
       let langPromise = lang.fetch();

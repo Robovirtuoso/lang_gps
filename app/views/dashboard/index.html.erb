@@ -1,4 +1,14 @@
+<% content_for(:partials) do %>
+  <%= render 'shared/language_modal' %>
+<% end %>
+
 <div id='dashboard-view'>
   <h1>User dashboard</h1>
   <p>lol dude</p>
 </div>
+
+<ul>
+  <% @languages.each do |lang| %>
+    <li><%= lang.name %></li>
+  <% end %>
+</ul>

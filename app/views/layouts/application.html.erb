@@ -16,6 +16,8 @@
     <%= yield %>
   </body>
 
+  <%= yield(:partials) if content_for?(:partials) %>
+
   <script>
     new RouteTemplate().call(); 
   </script>

@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+File.foreach(Rails.root.join('db', 'languages.txt'), "\n") do |language|
+  Language.create(name: language.strip)
+end

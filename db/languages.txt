@@ -1,0 +1,51 @@
+French
+Spanish
+Chinese (Mandarin)
+Chinese (Cantonese)
+Chinese (Hakka)
+Chinese (Hokkien)
+Japanese
+Turkish
+Persian (Farsi)
+Amharic
+Hebrew
+Arabic (MSA)
+Arabic (Egyptian)
+Arabic (Lebanese)
+Arabic (Moroccan)
+Polish
+Russian
+Serbian
+Portuguese
+Korean
+English
+Hindustani (Hindi)
+Hindustani (Urdu)
+Tamil
+Bengali
+German
+Dutch
+Malay
+Punjabi
+Swahili
+Vietnamese
+Italian
+Thai
+Czech
+Afrikaans
+Albanian
+Catalan
+Croatian
+Danish
+Esperanto
+Filipino (Tagalog)
+Finnish
+Estonian
+Greek
+Norwegian
+Pashto
+Romanian
+Serbian
+Swedish
+Xhosa
+Ukrainian

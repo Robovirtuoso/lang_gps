@@ -2,6 +2,10 @@ Controllers.DashboardController = class DashboardController {
   constructor(el) {
     this.el = el;
     this.languageUser = new LanguageUsers();
+    this.$modal = $('.modal#language-form');
+
+    // bindings
+    this.validateLanguage = _.bind(this.validateLanguage, this);
   }
 
   render() {
@@ -9,6 +13,11 @@ Controllers.DashboardController = class DashboardController {
     return this;
   }
 
-  validateLanguage() {
+  validateLanguage(data) {
+    if (data.length > 0) {
+      return true;
+    } else {
+      this.$modal.modal();
+    }
   }
 }
