@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'dashboard#index', as: :authenticated_root
+    resources :entries
   end
 
   namespace :api do
