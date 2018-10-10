@@ -42,9 +42,9 @@ class EntryForm
   def converted_duration
     case duration_type
     when "Hours"
-      Integer(duration).hour.seconds.to_i
+      Float(duration).hour.seconds.to_i
     when "Minutes"
-      Integer(duration).minutes.seconds.to_i
+      Float(duration).minutes.seconds.to_i
     end
   end
 

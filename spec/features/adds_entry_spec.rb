@@ -10,7 +10,7 @@ RSpec.describe "adds a new entry", type: :feature do
     user.languages << language
     study_habit
 
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   it "creates a new entry and redirects to dashboard" do

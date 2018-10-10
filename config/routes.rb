@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :language_users
+    resources :entries, only: [:index]
   end
 
   root to: "home#index"

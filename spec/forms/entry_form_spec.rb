@@ -17,7 +17,7 @@ RSpec.describe EntryForm, type: :model do
       language_studied: language.id,
       duration: "1",
       duration_type: "Hours",
-      study_habits: ["Listening", "Reading"],
+      study_habits: ["Listening", "Reading"]
     )
 
     EntryForm.new(options)
@@ -104,6 +104,12 @@ RSpec.describe EntryForm, type: :model do
         form = create_form(duration_type: "Hours", duration: "1")
         form.save
         expect(Entry.first.duration).to eq(1.hour.seconds.to_i)
+      end
+
+      it "translates 1.5 hour to seconds" do
+        form = create_form(duration_type: "Hours", duration: "1.5")
+        form.save
+        expect(Entry.first.duration).to eq(1.5.hour.seconds.to_i)
       end
 
       it "translates 5 hours to seconds" do

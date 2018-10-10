@@ -1,5 +1,6 @@
 <% content_for(:partials) do %>
   <%= render 'shared/language_modal' %>
+  <%= javascript_include_tag 'https://www.gstatic.com/charts/loader.js' %>
 <% end %>
 
 <div id='dashboard-view'>
@@ -11,6 +12,11 @@
       <li><%= lang.name %></li>
     <% end %>
   </ul>
+
+  <div id='chart-view'>
+    <div id='language-chart'>
+    </div>
+  </div>
 
   <footer class='actions'>
     <%= link_to 'Make an entry', new_entry_path  %>
