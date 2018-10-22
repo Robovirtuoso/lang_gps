@@ -17,7 +17,7 @@ class EntriesController < ApplicationController
   def entry_params
     params.require(:entry_form).permit(
       :duration, :duration_type, :language_studied,
-      :notes, study_habits: []
+      :notes, :study_habit
     )
   end
 end

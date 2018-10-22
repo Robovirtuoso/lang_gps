@@ -19,22 +19,12 @@ Controllers.ChartController = class ChartController {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Study Habit');
     data.addColumn('number', 'Time');
-    /*
-       Need to have code call API for study habits
-     */
-
-    // data.addRows([
-    //   ['Listening', 10],
-    //   ['Reading', 5]
-    // ])
 
     $.ajax({
       url: '/api/entries/',
       method: 'GET',
       dataType: 'JSON'
     }).done((entries) => {
-      // data.addRows(entries);
-
       let enty = this.getData(entries["entries"]);
       data.addRows(enty);
       this.chart().draw(data, this.options);

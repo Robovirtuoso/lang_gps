@@ -1,7 +1,11 @@
 class Entry < ApplicationRecord
-  has_many :entry_study_habits
-  has_many :study_habits, through: :entry_study_habits
+  STUDY_HABITS = %w(listening reading writing speaking).freeze
 
   belongs_to :language
   belongs_to :user
+
+  validates :user_id, presence: true
+  validates :language_id, presence: true
+
+  validates :study_habit, presence: true, inclusion: { in: STUDY_HABITS }
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_220239) do
+ActiveRecord::Schema.define(version: 2018_10_14_001508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,17 +22,10 @@ ActiveRecord::Schema.define(version: 2018_10_09_220239) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "notes"
+    t.string "study_habit"
     t.index ["language_id"], name: "index_entries_on_language_id"
+    t.index ["study_habit"], name: "index_entries_on_study_habit"
     t.index ["user_id"], name: "index_entries_on_user_id"
-  end
-
-  create_table "entry_study_habits", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "entry_id"
-    t.bigint "study_habit_id"
-    t.index ["entry_id"], name: "index_entry_study_habits_on_entry_id"
-    t.index ["study_habit_id"], name: "index_entry_study_habits_on_study_habit_id"
   end
 
   create_table "language_users", force: :cascade do |t|
@@ -45,12 +38,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_220239) do
   end
 
   create_table "languages", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "study_habits", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

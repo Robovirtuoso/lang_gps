@@ -2,12 +2,12 @@ class EntryForm
   include ActiveModel::Model
 
   attr_accessor :duration, :duration_type, :language_studied,
-    :user, :study_habits, :notes
+    :user, :study_habit, :notes
 
   validates :duration, presence: true
   validates :duration_type, inclusion: ["Hours", "Minutes"]
   validates :language_studied, presence: true
-  validates :study_habits, presence: true
+  validates :study_habit, presence: true, inclusion: Entry::STUDY_HABITS
   validates :user, presence: true
 
   # should this object validate that the user object
@@ -17,16 +17,13 @@ class EntryForm
   def save
     return false unless valid?
 
-    options = {
+    Entry.create(
       duration: converted_duration,
       user_id: user.id,
+      study_habit: study_habit,
       language_id: language_studied,
       notes: notes
-    }
-
-    Entry.create(options).tap do |entry|
-      entry.study_habits << StudyHabit.where(id: study_habits)
-    end
+    )
   end
 
   def languages

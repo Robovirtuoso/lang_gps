@@ -15,7 +15,6 @@ RSpec.describe '/api/entries/', type: :request do
       # setup
       user = create(:user)
       language = create(:language)
-      habit = create(:study_habit, name: 'Reading')
       user.languages << language
 
       EntryForm.new(
@@ -23,7 +22,7 @@ RSpec.describe '/api/entries/', type: :request do
         language_studied: language.id,
         duration: "2",
         duration_type: "Hours",
-        study_habits: [habit.id]
+        study_habit: "reading"
       ).save
 
       login_as(user, :scope => :user)
@@ -50,7 +49,7 @@ RSpec.describe '/api/entries/', type: :request do
       expect(res).to have_key "entries"
 
       res_entry = res["entries"]["reading"]
-      expect(res_entry["time_range"].first).to eq Entry.first.created_at.to_s
+      expect(res_entry["time_range"].first).to eq Entry.first.created_at.to_formatted_s(:db)
       expect(res_entry["total_time"]["hours"]).to eq 2
       expect(res_entry["languages"]).to include language.name
 

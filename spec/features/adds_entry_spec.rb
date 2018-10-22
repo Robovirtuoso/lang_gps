@@ -3,12 +3,10 @@ require 'rails_helper'
 RSpec.describe "adds a new entry", type: :feature do
 
   let(:language) { create(:language) }
-  let(:study_habit) { create(:study_habit, name: 'Listening') }
 
   before(:each) do
     user = create(:user)
     user.languages << language
-    study_habit
 
     login_as(user, scope: :user)
   end
@@ -27,7 +25,7 @@ RSpec.describe "adds a new entry", type: :feature do
     end
 
     within_fieldset('study_habits') do
-      check "Listening", allow_label_click: true
+      choose "listening", allow_label_click: true
     end
 
     within_fieldset('notes') do
@@ -43,7 +41,7 @@ RSpec.describe "adds a new entry", type: :feature do
     entry = Entry.first
 
     expect(entry.language).to eq language
-    expect(entry.study_habits).to include study_habit
+    expect(entry.study_habit).to eq "listening"
     expect(entry.notes).to eq "These are some notes"
     expect(entry.duration).to eq 1800
   end

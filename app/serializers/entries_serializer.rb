@@ -1,8 +1,8 @@
 class EntriesSerializer
-  attr_reader :params
+  attr_reader :params, :user_id
 
   def initialize(params={})
-    @params = params
+    @user_id = params.fetch(:user_id)
   end
 
   def to_json(*args)
@@ -11,36 +11,24 @@ class EntriesSerializer
 
   private
 
+  def entries
+    @entries ||= Entry.where(user_id: user_id).group_by(&:study_habit)
+  end
+
+  def query
+    @query ||= EntryQuery.new(user_id)
+  end
+
+  def base_struct
+    @base_struct ||= { entries: {} }.with_indifferent_access
+  end
+
   def structure
-    strct = {
-      entries: {}
-    }
-
-    entry_enum = Entry.joins(study_habits: :entry_study_habits).where(
-      user_id: params[:user].id
-    ).find_each
-
-    StudyHabit.joins(entries: [:entry_study_habits, :language]).each do |study|
-      key = study.name.downcase
-      strct[:entries][key] = {}
-      
-      entry_enum = study.entries.where(user_id: params[:user].id)
-
-      strct[:entries][key][:time_range] = [entry_enum.first.created_at, entry_enum.to_a.last.created_at].uniq
-
-      time = entry_enum.inject(0) do |total, entry|
-        total += entry.duration
-      end
-
-      strct[:entries][key][:total_time] = ActiveSupport::Duration.build(time).parts
-      strct[:entries][key][:languages] = entry_enum.flat_map { |e| e.language.name }
-
-      strct[:entries][key][:collection] = entry_enum.map do |entry|
-        length = ActiveSupport::Duration.build(entry.duration).parts[:hours]
-        { length: length, when: entry.created_at }
-      end
+    entries.each_pair do |study, entry_array|
+      serializer = StudyHabitSerializer.new(study, entry_array, query.execute(study)) 
+      base_struct[:entries].merge!(serializer)
     end
 
-    strct
+    base_struct
   end
 end

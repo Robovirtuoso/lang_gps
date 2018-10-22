@@ -11,9 +11,6 @@ RSpec.describe "views charts with language related data", type: :feature do
     end
 
     it 'shows a chart with a 50/50 split of time' do
-      habit1 = create(:study_habit, name: 'Listening')
-      habit2 = create(:study_habit, name: 'Reading')
-
       language = create(:language)
       user = create(:user)
 
@@ -24,7 +21,15 @@ RSpec.describe "views charts with language related data", type: :feature do
         language_studied: language.id,
         duration: "2",
         duration_type: "Hours",
-        study_habits: [habit1.id, habit2.id]
+        study_habit: "listening"
+      ).save
+
+      EntryForm.new(
+        user: user,
+        language_studied: language.id,
+        duration: "2",
+        duration_type: "Hours",
+        study_habit: "reading"
       ).save
 
       login_as(user, scope: :user)
@@ -40,9 +45,6 @@ RSpec.describe "views charts with language related data", type: :feature do
     end
 
     it 'shows a chart over a 7 day period' do
-      habit1 = create(:study_habit, name: 'Writing')
-      habit2 = create(:study_habit, name: 'Reading')
-
       language = create(:language)
       user = create(:user)
 
@@ -54,7 +56,7 @@ RSpec.describe "views charts with language related data", type: :feature do
           language_studied: language.id,
           duration: "2",
           duration_type: "Hours",
-          study_habits: [habit1.id, habit2.id]
+          study_habit: "reading"
         ).save
       }
 
@@ -64,7 +66,7 @@ RSpec.describe "views charts with language related data", type: :feature do
           language_studied: language.id,
           duration: "2.5",
           duration_type: "Hours",
-          study_habits: [habit2.id]
+          study_habit: "writing"
         ).save
       }
 

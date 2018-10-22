@@ -4,7 +4,7 @@ module Api
 
     def index
       respond_with EntriesSerializer.new(params.reverse_merge({
-        user: current_user
+        user_id: current_user.id
       }))
     end
   end

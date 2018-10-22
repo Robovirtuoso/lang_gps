@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe EntryForm, type: :model do
   it { is_expected.to validate_presence_of(:duration) }
   it { is_expected.to validate_presence_of(:language_studied) }
-  it { is_expected.to validate_presence_of(:study_habits) }
+  it { is_expected.to validate_presence_of(:study_habit) }
   it { is_expected.to validate_presence_of(:user) }
 
+  it { is_expected.to validate_inclusion_of(:study_habit).in_array(%w(listening reading speaking writing)) }
   it { is_expected.to validate_inclusion_of(:duration_type).in_array(["Hours", "Minutes"]) }
 
   let(:user) { create(:user) }
@@ -17,7 +18,7 @@ RSpec.describe EntryForm, type: :model do
       language_studied: language.id,
       duration: "1",
       duration_type: "Hours",
-      study_habits: ["Listening", "Reading"]
+      study_habit: "reading"
     )
 
     EntryForm.new(options)
@@ -62,14 +63,11 @@ RSpec.describe EntryForm, type: :model do
     end
 
     it "associates study habits with entry" do
-      habit1, habit2 = create(:study_habit, name: 'Listening'), create(:study_habit, name: 'Reading')
-
-      form = create_form(study_habits: [habit1.id, habit2.id])
+      form = create_form(study_habit: "listening")
       form.save
 
       entry = Entry.first
-      expect(entry.study_habits).to include(habit1)
-      expect(entry.study_habits).to include(habit2)
+      expect(entry.study_habit).to eq "listening"
     end
 
     it "adds an optinoal note" do
