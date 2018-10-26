@@ -20,9 +20,9 @@ RSpec.describe '/api/entries/', type: :request do
       EntryForm.new(
         user: user,
         language_studied: language.id,
-        duration: "2",
-        duration_type: "Hours",
-        study_habit: "reading"
+        entries: [
+          { duration: "2", duration_type: "Hours", study_habit: "reading" }
+        ]
       ).save
 
       login_as(user, :scope => :user)

@@ -31,6 +31,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+  gem 'awesome_print'
 
   # JS Test Runner
   gem 'teaspoon-mocha'

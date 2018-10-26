@@ -21,10 +21,8 @@ RSpec.describe EntriesController, type: :controller do
     ##
     # JSON from form data on entries#new
     # "entry_form"=>{
-    #   "duration"=>"30", 
-    #   "duration_type"=>"Minutes", 
     #   "language_studied"=>"55", 
-    #   "study_habits"=>["", "5", "6"], 
+    #   "entries" => [ { "duration" => "30", "duration_type" => "Minutes", "study_habit" => "writing" } ]
     #   "notes"=>""
     # }
 
@@ -42,10 +40,10 @@ RSpec.describe EntriesController, type: :controller do
       let(:correct_params) do
         { 
           entry_form: {
-            duration: minutes,
-            duration_type: "Minutes",
+            entries: [
+              { study_habit: "writing", duration: minutes, duration_type: "Minutes", }
+            ],
             language_studied: language.id,
-            study_habit: "writing",
             notes: "today I wrote a test"
           }
         }

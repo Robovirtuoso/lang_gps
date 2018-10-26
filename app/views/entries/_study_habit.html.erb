@@ -1,0 +1,16 @@
+<section id=<%="entry-study-#{habit}-view"%> class='study_habit'>
+  <div class='custom-control custom-checkbox'>
+    <input id=<%="study_habit_#{habit}"%> class='custom-control-input' type='checkbox'>
+    <label for=<%="study_habit_#{habit}"%> class='custom-control-label'>
+      <%= habit.upcase %>
+    </label>
+  </div>
+
+  <section class='habit-fields'>
+    <%= fields_for 'entry_form[entries][]', @form.proxy_entry do |f| %>
+      <%= f.number_field :duration, class: 'form-control' %>
+      <%= f.select :duration_type, options_for_select({ "Choose time" => "", "Minutes" => "Minutes", "Hours" => "Hours" }), {}, { class: 'form-control'} %>
+      <%= f.hidden_field :study_habit, class: 'form-control', value: habit %>
+    <% end %>
+  </section>
+</section>

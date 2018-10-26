@@ -3,8 +3,6 @@
 <%= form_for @form, url: entries_path do |f| %>
   <fieldset class="form-group" id='time'>
     <legend>How long did you study?</legend>
-    <%= f.number_field :duration, class: 'form-control' %>
-    <%= f.select :duration_type, options_for_select(["Minutes", "Hours"]), {}, { class: 'form-control'} %>
   </fieldset>
 
   <fieldset class="form-group" id='language'>
@@ -15,14 +13,10 @@
   <fieldset class="form-group" id='study_habits'>
     <legend>How did you study?</legend>
 
-    <div class="form-check">
-      <%= f.collection_radio_buttons :study_habit, Entry::STUDY_HABITS, :itself, :itself do |b| %>
-        <div class='custom-control custom-checkbox'>
-          <%= b.radio_button(class: 'custom-control-input') %>
-          <%= b.label(class: 'custom-control-label') %>
-        </div>
-      <% end %>
-    </div>
+    <% Entry::STUDY_HABITS.each do |habit| %>
+      <%= render 'study_habit', habit: habit %>
+    <% end %>
+
   </fieldset>
 
   <fieldset class="form-group" id='notes'>

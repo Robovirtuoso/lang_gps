@@ -19,17 +19,10 @@ RSpec.describe "views charts with language related data", type: :feature do
       EntryForm.new(
         user: user,
         language_studied: language.id,
-        duration: "2",
-        duration_type: "Hours",
-        study_habit: "listening"
-      ).save
-
-      EntryForm.new(
-        user: user,
-        language_studied: language.id,
-        duration: "2",
-        duration_type: "Hours",
-        study_habit: "reading"
+        entries: [
+          { duration: "2", duration_type: "Hours", study_habit: "listening" },
+          { duration: "2", duration_type: "Hours", study_habit: "reading" },
+        ]
       ).save
 
       login_as(user, scope: :user)
@@ -54,9 +47,9 @@ RSpec.describe "views charts with language related data", type: :feature do
         EntryForm.new(
           user: user,
           language_studied: language.id,
-          duration: "2",
-          duration_type: "Hours",
-          study_habit: "reading"
+          entries: [
+            { duration: "2", duration_type: "Hours", study_habit: "reading" }
+          ]
         ).save
       }
 
@@ -64,9 +57,9 @@ RSpec.describe "views charts with language related data", type: :feature do
         EntryForm.new(
           user: user,
           language_studied: language.id,
-          duration: "2.5",
-          duration_type: "Hours",
-          study_habit: "writing"
+          entries: [
+            { duration: "2.5", duration_type: "Hours", study_habit: "writing" }
+          ]
         ).save
       }
 
