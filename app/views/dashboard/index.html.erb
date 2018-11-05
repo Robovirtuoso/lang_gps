@@ -6,6 +6,7 @@
 <div id='dashboard-view'>
   <h1>User dashboard</h1>
   <p>lol dude</p>
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
   <ul>
     <% @languages.each do |lang| %>

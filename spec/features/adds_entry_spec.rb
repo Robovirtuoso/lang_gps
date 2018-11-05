@@ -94,4 +94,63 @@ RSpec.describe "adds a new entry", type: :feature do
     expect(entry2.study_habit).to eq "writing"
     expect(entry2.duration).to eq 3600
   end
+
+  it "can create an entry for all study habits" do
+    visit '/'
+    click_link 'Make an entry'
+
+    within_fieldset('language') do
+      select language.name, from: 'entry_form[language_studied]'
+    end
+
+    within('#entry-study-reading-view') do
+      find('label[for="study_habit_reading"]').click
+
+      within('.habit-fields') do
+        fill_in "entry_form[entries][][duration]", with: 30
+        select "Minutes", from: 'entry_form[entries][][duration_type]'
+      end
+    end
+
+    within('#entry-study-speaking-view') do
+      find('label[for="study_habit_speaking"]').click
+
+      within('.habit-fields') do
+        fill_in "entry_form[entries][][duration]", with: 2
+        select "Hours", from: 'entry_form[entries][][duration_type]'
+      end
+    end
+
+    within('#entry-study-listening-view') do
+      find('label[for="study_habit_listening"]').click
+
+      within('.habit-fields') do
+        fill_in "entry_form[entries][][duration]", with: 10
+        select "Minutes", from: 'entry_form[entries][][duration_type]'
+      end
+    end
+
+    within('#entry-study-writing-view') do
+      find('label[for="study_habit_writing"]').click
+
+      within('.habit-fields') do
+        fill_in "entry_form[entries][][duration]", with: 1
+        select "Hours", from: 'entry_form[entries][][duration_type]'
+      end
+    end
+
+    click_button "Save today's effort!"
+
+    # redirects to dashboard
+    expect(current_path).to eq dashboard_index_path
+
+    # creates an entry
+    within('#language-chart') do
+      expect(page).to have_selector('g[column-id="reading"]')
+      expect(page).to have_selector('g[column-id="writing"]')
+      expect(page).to have_selector('g[column-id="listening"]')
+      expect(page).to have_selector('g[column-id="speaking"]')
+    end
+  end
+
 end

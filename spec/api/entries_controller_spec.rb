@@ -37,7 +37,7 @@ RSpec.describe '/api/entries/', type: :request do
       #     reading: {
       #       languages: ["French"],
       #       time_range: [Date.of.first.entry, Date.of.last.entry],
-      #       total_time: { hours: 2 },
+      #       total_time: 2,
       #       collection: [
       #         { when: entry.created_at, length: 1 (hour) }
       #         { when: entry.created_at, length: 1 (hour) }
@@ -50,7 +50,7 @@ RSpec.describe '/api/entries/', type: :request do
 
       res_entry = res["entries"]["reading"]
       expect(res_entry["time_range"].first).to eq Entry.first.created_at.to_formatted_s(:db)
-      expect(res_entry["total_time"]["hours"]).to eq 2
+      expect(res_entry["total_time"]).to eq 2
       expect(res_entry["languages"]).to include language.name
 
       expect(res_entry["collection"]).to be_kind_of(Array)
@@ -58,5 +58,40 @@ RSpec.describe '/api/entries/', type: :request do
       expect(res_entry["collection"][0]["length"]).to eq 2
       expect(res_entry["collection"][0]["when"]).to eq Entry.first.created_at.to_s
     end
+
+    it 'time is shown in hours' do
+      user = create(:user)
+      language = create(:language)
+      user.languages << language
+
+      EntryForm.new(
+        user: user,
+        language_studied: language.id,
+        entries: [
+          { duration: "2", duration_type: "Hours", study_habit: "reading" },
+        ]
+      ).save
+
+      EntryForm.new(
+        user: user,
+        language_studied: language.id,
+        entries: [
+          { duration: "30", duration_type: "Minutes", study_habit: "reading" }
+        ]
+      ).save
+
+      login_as(user, :scope => :user)
+
+      # action
+      get "/api/entries/", headers: headers
+
+      res_entry = res["entries"]["reading"]
+      expect(res_entry["total_time"]).to eq 2.5
+
+      expect(res_entry["collection"][0]["length"]).to eq 2
+      expect(res_entry["collection"][1]["length"]).to eq 0.5
+    end
+
   end
+
 end

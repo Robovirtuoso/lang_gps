@@ -18,7 +18,7 @@ Controllers.ChartController = class ChartController {
   renderChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Study Habit');
-    data.addColumn('number', 'Time');
+    data.addColumn('number', 'Hours');
 
     $.ajax({
       url: '/api/entries/',
@@ -35,7 +35,7 @@ Controllers.ChartController = class ChartController {
   getData(entries) {
     let data = [];
     for (let key in entries) {
-      data.push([key, entries[key]["total_time"]["hours"]])
+      data.push([key, entries[key]["total_time"]])
     }
 
     return data;
