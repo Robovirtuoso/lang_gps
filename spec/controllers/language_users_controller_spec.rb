@@ -58,6 +58,22 @@ RSpec.describe LanguageUsersController, type: :controller do
 
       end
     end
+
+    context 'language is already associated with another user' do
+      it 'allows languages to be associated across users' do
+        user = create(:user)
+        user2 = create(:user)
+        sign_in user
+
+        language = create(:language)
+        user2.languages << language
+
+        expect {
+          post :create, params: { language_user: { language_id: [language.id] } }
+        }.to change(LanguageUser, :count)
+
+      end
+    end
   end
 
 end

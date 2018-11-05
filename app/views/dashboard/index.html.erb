@@ -1,5 +1,5 @@
 <% content_for(:partials) do %>
-  <%= render 'shared/language_modal' %>
+  <%= render 'shared/language_modal', language_user: @language_user, languages: @languages %>
   <%= javascript_include_tag 'https://www.gstatic.com/charts/loader.js' %>
 <% end %>
 
@@ -8,7 +8,7 @@
   <p>lol dude</p>
   <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
-  <ul>
+  <ul class='current-languages'>
     <% @languages.each do |lang| %>
       <li><%= lang.name %></li>
     <% end %>
@@ -21,6 +21,7 @@
 
   <footer class='actions'>
     <%= link_to 'Make an entry', new_entry_path  %>
+    <button type='button' data-toggle='modal' data-target='#language-form' class='btn btn-primary add-language'>More Languages</button>
   </footer>
 </div>
 

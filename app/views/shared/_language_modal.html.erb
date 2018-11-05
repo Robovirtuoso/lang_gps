@@ -1,3 +1,12 @@
+<%#
+  This partial has two dependencies
+    - langauge_user (a LanguageUser object)
+    - languages (a collection of Language objects)
+
+  When rendering this partial please be sure to provide these variables.
+    `render 'language_modal', language_user: LanguageUser.new, languages: current_user.langauges`
+%>
+
 <div id='language-form' class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -7,10 +16,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <%= form_for @language_user do |f| %>
+      <%= form_for language_user do |f| %>
         <div class="modal-body">
             <%= f.label "Languages" %>
-            <%= f.collection_check_boxes :language_id, Language.all, :id, :name do |b| %>
+            <%= f.collection_check_boxes :language_id, (Language.all - languages), :id, :name do |b| %>
               <fieldset><%= b.label { b.check_box + b.text } %></fieldset>
             <% end %>
         </div>
