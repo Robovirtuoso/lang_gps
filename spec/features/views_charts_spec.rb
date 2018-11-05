@@ -37,6 +37,43 @@ RSpec.describe "views charts with language related data", type: :feature do
       expect(page).to have_content('50%')
     end
 
+    it 'shows a chart of multiple language data' do
+      lang1 = create(:language)
+      lang2 = create(:language)
+      user = create(:user)
+
+      user.languages << [lang1, lang2]
+
+      EntryForm.new(
+        user: user,
+        language_studied: lang1.id,
+        entries: [
+          { duration: "1", duration_type: "Hours", study_habit: "reading" }
+        ]
+      ).save
+
+      EntryForm.new(
+        user: user,
+        language_studied: lang2.id,
+        entries: [
+          { duration: "1", duration_type: "Hours", study_habit: "reading" }
+        ]
+      ).save
+
+      login_as(user, scope: :user)
+
+      visit '/'
+      
+      expect(page.find('#multi-language-chart')).to be_present
+      within('#multi-language-chart') do
+        expect(page).to have_content(lang1.name)
+        expect(page).to have_content(lang2.name)
+
+      end
+
+      expect(page).to have_content('50%')
+    end
+
     it 'shows a chart over a 7 day period' do
       language = create(:language)
       user = create(:user)

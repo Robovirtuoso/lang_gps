@@ -34,8 +34,18 @@ RSpec.describe '/api/entries/', type: :request do
       # Expect JSON to look like:
       # {
       #   entries: {
+      #     langauges: {
+      #       spanish: {
+      #         total_time: 2,
+      #         collection: [
+      #           { when: entry.created_at, length: 1 (hour) }
+      #           { when: entry.created_at, length: 1 (hour) }
+      #         ]
+      #       }
+      #     }
+      #
       #     reading: {
-      #       languages: ["French"],
+      #       languages: ["Spanish"]
       #       time_range: [Date.of.first.entry, Date.of.last.entry],
       #       total_time: 2,
       #       collection: [
@@ -48,9 +58,15 @@ RSpec.describe '/api/entries/', type: :request do
 
       expect(res).to have_key "entries"
 
+      res_lang = res["entries"]["languages"][language.name]
+      expect(res_lang["total_time"]).to eq 2
+      expect(res_lang["collection"][0]["length"]).to eq 2
+      expect(res_lang["collection"][0]["when"]).to eq Entry.first.created_at.to_s
+
       res_entry = res["entries"]["reading"]
       expect(res_entry["time_range"].first).to eq Entry.first.created_at.to_formatted_s(:db)
       expect(res_entry["total_time"]).to eq 2
+
       expect(res_entry["languages"]).to include language.name
 
       expect(res_entry["collection"]).to be_kind_of(Array)

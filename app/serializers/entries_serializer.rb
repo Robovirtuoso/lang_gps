@@ -1,8 +1,9 @@
 class EntriesSerializer
-  attr_reader :params, :user_id
+  attr_reader :params, :user_id, :serializers
 
   def initialize(params={})
     @user_id = params.fetch(:user_id)
+    @serializers ||= []
   end
 
   def to_json(*args)
@@ -12,7 +13,7 @@ class EntriesSerializer
   private
 
   def entries
-    @entries ||= Entry.where(user_id: user_id).group_by(&:study_habit)
+    @entries ||= Entry.where(user_id: user_id)
   end
 
   def query
@@ -24,8 +25,13 @@ class EntriesSerializer
   end
 
   def structure
-    entries.each_pair do |study, entry_array|
-      serializer = StudyHabitSerializer.new(study, entry_array, query.execute(study)) 
+    entries.by_study.each_pair do |study, entry_array|
+      serializers << StudyHabitSerializer.new(study, entry_array, query.execute(study)) 
+    end
+
+    serializers << LanguageSerializer.new(entries.by_language)
+
+    serializers.each do |serializer|
       base_struct[:entries].merge!(serializer)
     end
 

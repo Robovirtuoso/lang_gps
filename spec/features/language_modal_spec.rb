@@ -6,9 +6,10 @@ RSpec.describe 'language modal', type: :feature do
     user = create(:user)
     5.times { create(:language) }
 
-    user.languages << Language.first
+    lang1 = Language.first
+    user.languages << lang1
 
-    lang2, lang3 = Language.order("RANDOM()").first(2)
+    lang2, lang3 = Language.where.not(id: lang1.id).order("RANDOM()").first(2)
 
     login_as(user, scope: :user)
 
