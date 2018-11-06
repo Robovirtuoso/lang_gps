@@ -5,14 +5,40 @@
 
 <div id='dashboard-view'>
   <h1>User dashboard</h1>
-  <p>lol dude</p>
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
-  <ul class='current-languages'>
-    <% @languages.each do |lang| %>
-      <li><%= lang.name %></li>
-    <% end %>
-  </ul>
+  <section>
+    <p>Currently studying: </p>
+
+    <ul class='current-languages'>
+      <% @languages.each do |lang| %>
+        <li><%= lang.name %></li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section>
+    <p>Most recent entries: </p>
+    <table class='most-recent table table-dark'>
+      <thead>
+
+        <tr>
+          <td scope="col">Language</td>
+          <td scope="col">Study Method</td>
+          <td scope="col">Study Time</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.language_name %></td>
+            <td><%= entry.study_habit %></td>
+            <td><%= entry.study_time %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
   <div id='chart-view'>
     <div id='language-chart'>
@@ -25,6 +51,7 @@
   <footer class='actions'>
     <%= link_to 'Make an entry', new_entry_path  %>
     <button type='button' data-toggle='modal' data-target='#language-form' class='btn btn-primary add-language'>More Languages</button>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
   </footer>
 </div>
 
