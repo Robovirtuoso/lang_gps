@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe EntryForm, type: :model do
-  # it { is_expected.to validate_presence_of(:duration) }
   it { is_expected.to validate_presence_of(:language_studied) }
   it { is_expected.to validate_presence_of(:entries) }
   it { is_expected.to validate_presence_of(:user) }
-
-  # it { is_expected.to validate_inclusion_of(:study_habit).in_array(%w(listening reading speaking writing)) }
-  # it { is_expected.to validate_inclusion_of(:duration_type).in_array(["Hours", "Minutes"]) }
 
   let(:user) { create(:user) }
   let(:language) { create(:language) }

@@ -4,4 +4,5 @@ class User < ApplicationRecord
 
   has_many :language_users
   has_many :languages, through: :language_users
+  has_many :entries
 end

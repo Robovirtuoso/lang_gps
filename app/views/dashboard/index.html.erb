@@ -34,6 +34,7 @@
             <td><%= entry.language_name %></td>
             <td><%= entry.study_habit %></td>
             <td><%= entry.study_time %></td>
+            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
           </tr>
         <% end %>
       </tbody>

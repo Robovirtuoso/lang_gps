@@ -1,15 +1,17 @@
 class DashboardEntryPresenter
-  attr_reader :entry
+  include ActiveModel::Conversion
+  extend Forwardable
+
+  attr_reader :entry, :id
+
+  def_delegators :@entry, :study_habit, :id, :persisted?
+
   def initialize(entry)
     @entry = entry
   end
   
   def language_name
     entry.language.name
-  end
-
-  def study_habit
-    entry.study_habit
   end
 
   def study_time
@@ -21,4 +23,5 @@ class DashboardEntryPresenter
       "#{parts[:minutes]} Minute(s)"
     end
   end
+
 end

@@ -1,0 +1,25 @@
+<h1>Update Entry</h1>
+
+<%= form_for(@form, method: :put, url: entry_path(@form.entry)) do |f| %>
+  <section>
+    <legend>How you studied:</legend>
+    <%= f.select :study_habit, Entry::STUDY_HABITS %> 
+  </section>
+
+  <section>
+    <legend>What you studied</legend>
+    <%= f.select :language_studied, options_for_select(@form.language_options, @form.language_default) %>
+  </section>
+
+  <section class='habit-fields'>
+    <legend>How long you studied</legend>
+    <%= f.number_field :duration, class: 'form-control'  %>
+    <%= f.select :duration_type, options_for_select(["Minutes", "Hours"], @form.duration_type), {}, { class: 'form-control'} %>
+  </section>
+
+  <section>
+    <%= f.submit 'Update' %>
+  </section>
+<% end %>
+
+<%= link_to 'Back to Dashboard', dashboard_index_path %>
