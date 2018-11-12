@@ -35,6 +35,7 @@
             <td><%= entry.study_habit %></td>
             <td><%= entry.study_time %></td>
             <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+            <td><%= link_to 'Delete', entry_path(entry), method: :delete, confirm: :true %></td>
           </tr>
         <% end %>
       </tbody>

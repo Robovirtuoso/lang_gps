@@ -30,6 +30,13 @@ class EntriesController < ApplicationController
     respond_with(@form, location: dashboard_index_path)
   end
 
+  def destroy
+    entry = Entry.find(params[:id])
+    entry.destroy
+
+    respond_with(200, location: dashboard_index_path)
+  end
+
   private
 
   def edit_entry_params
