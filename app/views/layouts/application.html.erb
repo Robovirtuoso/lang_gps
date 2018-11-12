@@ -9,11 +9,18 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/dashboard">LangGPS</a>
+  </nav>
+
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 
   <%= yield(:partials) if content_for?(:partials) %>
