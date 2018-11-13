@@ -18,9 +18,9 @@ class DashboardEntryPresenter
     parts = ActiveSupport::Duration.build(entry.duration).parts
 
     if entry.duration >= 3600
-      "#{parts[:hours]} Hour(s)"
+      "#{parts[:hours]} Hour".pluralize(parts[:hours])
     else
-      "#{parts[:minutes]} Minute(s)"
+      "#{parts[:minutes]} Minute".pluralize(parts[:minutes])
     end
   end
 

@@ -29,7 +29,15 @@ RSpec.describe DashboardEntryPresenter do
 
       obj = described_class.new(entry)
 
-      expect(obj.study_time).to eq "2 Hour(s)"
+      expect(obj.study_time).to eq "2 Hours"
+    end
+
+    it 'returns the study time in hours' do
+      entry = create(:entry, duration: 3600)
+
+      obj = described_class.new(entry)
+
+      expect(obj.study_time).to eq "1 Hour"
     end
 
     it 'returns the study time in minutes' do
@@ -37,7 +45,15 @@ RSpec.describe DashboardEntryPresenter do
 
       obj = described_class.new(entry)
 
-      expect(obj.study_time).to eq "30 Minute(s)"
+      expect(obj.study_time).to eq "30 Minutes"
+    end
+
+    it 'returns the study time in minutes' do
+      entry = create(:entry, duration: 60)
+
+      obj = described_class.new(entry)
+
+      expect(obj.study_time).to eq "1 Minute"
     end
   end
 
