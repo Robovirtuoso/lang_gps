@@ -1,5 +1,14 @@
 class EntriesController < ApplicationController
   respond_to :html
+
+  def index
+    @entries = Entry.where(user_id: current_user.id)
+                    .order('id asc')
+                    .last(5)
+                    .map { |entry| 
+                      DashboardEntryPresenter.new(entry) 
+                    }
+  end
   
   def new
     @form = EntryForm.new(user: current_user)
@@ -27,14 +36,14 @@ class EntriesController < ApplicationController
 
     @form.save
 
-    respond_with(@form, location: dashboard_index_path)
+    respond_with(@form, location: entries_path)
   end
 
   def destroy
     entry = Entry.find(params[:id])
     entry.destroy
 
-    respond_with(200, location: dashboard_index_path)
+    respond_with(200, location: entries_path)
   end
 
   private

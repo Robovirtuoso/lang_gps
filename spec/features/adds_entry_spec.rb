@@ -20,7 +20,7 @@ RSpec.describe "adds a new entry", type: :feature do
 
   it "creates a new entry and redirects to dashboard" do
     visit '/'
-    click_link 'Make an entry'
+    click_link 'New Entry'
 
     within_fieldset('language') do
       select language.name, from: 'entry_form[language_studied]'
@@ -55,7 +55,7 @@ RSpec.describe "adds a new entry", type: :feature do
   
   it "creates multiple entries" do
     visit '/'
-    click_link 'Make an entry'
+    click_link 'New Entry'
 
     within_fieldset('language') do
       select language.name, from: 'entry_form[language_studied]'
@@ -97,7 +97,7 @@ RSpec.describe "adds a new entry", type: :feature do
 
   it "can create an entry for all study habits" do
     visit '/'
-    click_link 'Make an entry'
+    click_link 'New Entry'
 
     within_fieldset('language') do
       select language.name, from: 'entry_form[language_studied]'

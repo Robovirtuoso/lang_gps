@@ -11,7 +11,7 @@ RSpec.describe "adds a new entry", type: :feature do
     entry = create(:entry, user_id: user.id, language_id: lang1.id, duration: 3600, study_habit: :listening)
 
     login_as(user, scope: :user)
-    visit '/'
+    visit '/entries'
 
     within(".most-recent") do
       expect(page).to have_content(lang1.name)

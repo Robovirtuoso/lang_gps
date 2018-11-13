@@ -7,7 +7,7 @@ RSpec.describe 'deletes an entry' do
     entry = create(:entry, user_id: user.id, language_id: language.id, duration: 3600, study_habit: :listening)
 
     login_as(user, scope: :user)
-    visit '/'
+    visit '/entries'
 
     within(".most-recent") do
       expect(page).to have_content(language.name)

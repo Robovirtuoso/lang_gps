@@ -1,31 +1,35 @@
-<h2>Study Entry</h2>
+<div class='row'>
+  <div class='col header'>
+    <h1>New Entry</h1>
+  </div>
+</div>
 
-<%= form_for @form, url: entries_path do |f| %>
-  <fieldset class="form-group" id='time'>
-    <legend>How long did you study?</legend>
-  </fieldset>
+<div class='row'>
+  <div class='col'>
+    <%= form_for @form, url: entries_path do |f| %>
+      <fieldset class="form-group" id='language'>
+        <legend>What did you study?</legend>
+        <%= f.select :language_studied, @form.language_options, {}, { class: 'form-control' } %>
+      </fieldset>
 
-  <fieldset class="form-group" id='language'>
-    <legend>What did you study?</legend>
-    <%= f.select :language_studied, @form.language_options, {}, { class: 'form-control' } %>
-  </fieldset>
+      <fieldset class="form-group" id='study_habits'>
+        <legend>How did you study?</legend>
 
-  <fieldset class="form-group" id='study_habits'>
-    <legend>How did you study?</legend>
+        <% Entry::STUDY_HABITS.each do |habit| %>
+          <%= render 'study_habit', habit: habit %>
+        <% end %>
 
-    <% Entry::STUDY_HABITS.each do |habit| %>
-      <%= render 'study_habit', habit: habit %>
+      </fieldset>
+
+      <fieldset class="form-group" id='notes'>
+        <legend>Quick Notes</legend>
+        <%= f.text_area :notes, class: 'form-control', rows: 3 %>
+      </fieldset>
+
+      <footer>
+        <%= f.submit "Save today's effort!", class: 'btn btn-primary' %>
+        <%= link_to 'Back to Dashboard', dashboard_index_path %>
+      </footer>
     <% end %>
-
-  </fieldset>
-
-  <fieldset class="form-group" id='notes'>
-    <legend>Quick Notes</legend>
-    <%= f.text_area :notes, class: 'form-control', rows: 3 %>
-  </fieldset>
-
-  <footer>
-    <%= f.submit "Save today's effort!", class: 'btn btn-primary' %>
-    <%= link_to 'Back to Dashboard', dashboard_index_path %>
-  </footer>
-<% end %>
+  </div>
+</div>

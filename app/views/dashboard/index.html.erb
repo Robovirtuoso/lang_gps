@@ -4,7 +4,13 @@
 <% end %>
 
 <div class='row'>
-  <div class='col-2'>
+  <div class='col header'>
+    <h1>Dashboard</h1>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-3'>
     <section id='sidebar'>
       <p>Currently studying: </p>
 
@@ -13,52 +19,41 @@
           <li><%= lang.name %></li>
         <% end %>
       </ul>
+
+    </section>
+    <section class='actions'>
+      <button type='button' data-toggle='modal' data-target='#language-form' class='btn btn-outline-secondary btn-sm add-language'>More Languages</button>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'sign-out' %>
     </section>
   </div>
 
   <div class='col-9'>
+
     <div id='dashboard-view'>
       <section>
         <div id='chart-view'>
-          <div id='language-chart'>
-          </div>
+          <div class='card-deck'>
+            <div class='card'>
+              <h5 class='card-header'>How You Study</h5>
+              <div class='card-body'>
+                <div id='language-chart'>
+                </div>
+              </div>
+            </div>
 
-          <div id='multi-language-chart'>
+            <div class='card'>
+              <h5 class='card-header'>What You Study</h5>
+              <div class='card-body'>
+                <div id='multi-language-chart'>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <p>Most recent entries: </p>
-        <table class='most-recent table table-dark'>
-          <thead>
-
-            <tr>
-              <td scope="col">Language</td>
-              <td scope="col">Study Method</td>
-              <td scope="col">Study Time</td>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @entries.each do |entry| %>
-              <tr>
-                <td><%= entry.language_name %></td>
-                <td><%= entry.study_habit %></td>
-                <td><%= entry.study_time %></td>
-                <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-                <td><%= link_to 'Delete', entry_path(entry), method: :delete, confirm: :true %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </section>
-
 
       <footer class='actions'>
-        <%= link_to 'Make an entry', new_entry_path  %>
-        <button type='button' data-toggle='modal' data-target='#language-form' class='btn btn-primary add-language'>More Languages</button>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
       </footer>
     </div>
   </div>

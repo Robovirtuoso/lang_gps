@@ -25,7 +25,7 @@ class BaseChart {
 
     let entry = this.getData(this.entries["entries"]);
     data.addRows(entry);
-    this.chart().draw(data, this.options);
+    this.chart().draw(data, this.chartOptions);
 
     return this;
   }
@@ -36,7 +36,5 @@ class BaseChart {
 }
 
 BaseChart.prototype.chartOptions = {
-  title: 'Study progress for the week',
-  width: 500,
-  height: 400
+  width: 350
 }

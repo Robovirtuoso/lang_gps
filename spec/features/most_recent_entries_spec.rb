@@ -20,7 +20,7 @@ RSpec.describe 'most recent entries', type: :feature do
 
     login_as(user, scope: :user)
 
-    visit '/'
+    visit '/entries'
 
     within('table.most-recent') do
       expect(page).to have_content(lang1.name)
@@ -38,7 +38,7 @@ RSpec.describe 'most recent entries', type: :feature do
 
     create(:entry, { user_id: user.id, language_id: lang2.id, duration: 60, study_habit: 'listening' })
 
-    visit '/'
+    visit '/entries'
 
     within('table.most-recent') do
       expect(page).to have_content(lang2.name)
