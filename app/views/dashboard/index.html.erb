@@ -32,7 +32,8 @@
     <div id='dashboard-view'>
       <section>
         <div id='chart-view'>
-          <div class='card-deck'>
+          <div class='card-columns'>
+
             <div class='card'>
               <h5 class='card-header'>How You Study</h5>
               <div class='card-body'>
@@ -48,6 +49,18 @@
                 </div>
               </div>
             </div>
+
+            <% @languages.each do |language| %>
+              <div class='card'>
+                <h5 class='card-header'><%= language.name %></h5>
+                <div class='card-body'>
+                  <div id=<%="language-#{language.id}-chart"%>>
+                    <div class='no-data-filler'><p>No data has been recorded for this language. Try adding a new entry.</p></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
           </div>
         </div>
       </section>

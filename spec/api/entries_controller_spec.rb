@@ -36,10 +36,15 @@ RSpec.describe '/api/entries/', type: :request do
       #   entries: {
       #     langauges: {
       #       spanish: {
+      #         id: 1,
       #         total_time: 2,
+      #         study_habits: {
+      #           listening: 1,
+      #           speaking: 1
+      #         }
       #         collection: [
-      #           { when: entry.created_at, length: 1 (hour) }
-      #           { when: entry.created_at, length: 1 (hour) }
+      #           { when: entry.created_at, length: 1 (hour), study_habit: "listening" }
+      #           { when: entry.created_at, length: 1 (hour), study_habit: "speaking" }
       #         ]
       #       }
       #     }
@@ -57,14 +62,19 @@ RSpec.describe '/api/entries/', type: :request do
       # }
 
       expect(res).to have_key "entries"
+      entry = Entry.first
 
       res_lang = res["entries"]["languages"][language.name]
       expect(res_lang["total_time"]).to eq 2
+      expect(res_lang["id"]).to eq language.id
+      expect(res_lang["study_habits"]["reading"]).to eq 2
+
       expect(res_lang["collection"][0]["length"]).to eq 2
-      expect(res_lang["collection"][0]["when"]).to eq Entry.first.created_at.to_s
+      expect(res_lang["collection"][0]["when"]).to eq entry.created_at.to_s
+      expect(res_lang["collection"][0]["study_habit"]).to eq entry.study_habit
 
       res_entry = res["entries"]["reading"]
-      expect(res_entry["time_range"].first).to eq Entry.first.created_at.to_formatted_s(:db)
+      expect(res_entry["time_range"].first).to eq entry.created_at.to_formatted_s(:db)
       expect(res_entry["total_time"]).to eq 2
 
       expect(res_entry["languages"]).to include language.name
@@ -72,7 +82,7 @@ RSpec.describe '/api/entries/', type: :request do
       expect(res_entry["collection"]).to be_kind_of(Array)
 
       expect(res_entry["collection"][0]["length"]).to eq 2
-      expect(res_entry["collection"][0]["when"]).to eq Entry.first.created_at.to_s
+      expect(res_entry["collection"][0]["when"]).to eq entry.created_at.to_s
     end
 
     it 'time is shown in hours' do

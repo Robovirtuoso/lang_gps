@@ -23,7 +23,7 @@ class BaseChart {
       data.addColumn(type, columns[type])
     }
 
-    let entry = this.getData(this.entries["entries"]);
+    let entry = this.getData(this.entries);
     data.addRows(entry);
     this.chart().draw(data, this.chartOptions);
 

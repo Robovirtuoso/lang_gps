@@ -11,7 +11,7 @@ RSpec.describe 'deletes an entry' do
 
     within(".most-recent") do
       expect(page).to have_content(language.name)
-      expect(page).to have_content("1 Hour(s)")
+      expect(page).to have_content("1 Hour")
       expect(page).to have_content("listening")
 
       click_link 'Delete'
@@ -20,7 +20,7 @@ RSpec.describe 'deletes an entry' do
 
     within(".most-recent") do
       expect(page).to_not have_content(language.name)
-      expect(page).to_not have_content("1 Hour(s)")
+      expect(page).to_not have_content("1 Hour")
       expect(page).to_not have_content("listening")
     end
   end

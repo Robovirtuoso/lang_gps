@@ -48,3 +48,19 @@ ul li {
 .navbar {
   background-color: $base-color;
 }
+
+.card-columns {
+  column-count: 2;
+}
+
+[id$="chart"] {
+  min-height: 200px;
+}
+
+.card .no-data-filler {
+  opacity: 0;
+
+  p { 
+    margin-bottom: 0 
+  }
+}

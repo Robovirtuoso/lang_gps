@@ -28,11 +28,11 @@ RSpec.describe 'most recent entries', type: :feature do
       expect(page).to have_content('writing')
       expect(page).to have_content('speaking')
 
-      expect(page).to have_content('1 Minute(s)')
-      expect(page).to have_content('30 Minute(s)')
-      expect(page).to have_content('45 Minute(s)')
-      expect(page).to have_content('1 Hour(s)')
-      expect(page).to have_content('2 Hour(s)')
+      expect(page).to have_content('1 Minute')
+      expect(page).to have_content('30 Minutes')
+      expect(page).to have_content('45 Minutes')
+      expect(page).to have_content('1 Hour')
+      expect(page).to have_content('2 Hours')
     end
 
 

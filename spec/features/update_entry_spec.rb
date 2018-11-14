@@ -15,7 +15,7 @@ RSpec.describe "adds a new entry", type: :feature do
 
     within(".most-recent") do
       expect(page).to have_content(lang1.name)
-      expect(page).to have_content("1 Hour(s)")
+      expect(page).to have_content("1 Hour")
       expect(page).to have_content("listening")
 
       click_link 'Edit'
@@ -31,11 +31,11 @@ RSpec.describe "adds a new entry", type: :feature do
 
     within(".most-recent") do
       expect(page).to_not have_content(lang1.name)
-      expect(page).to_not have_content("1 Hour(s)")
+      expect(page).to_not have_content("1 Hour")
       expect(page).to_not have_content("listening")
 
       expect(page).to have_content(lang2.name)
-      expect(page).to have_content("30 Minute(s)")
+      expect(page).to have_content("30 Minutes")
       expect(page).to have_content("reading")
     end
   end
