@@ -20,8 +20,28 @@ class EntriesSerializer
     @query ||= EntryQuery.new(user_id)
   end
 
+  def build_total_time
+    formatted_duration(entries.pluck(:duration).inject(:+))
+  end
+
+  def formatted_duration(time_in_seconds)
+    parts = ActiveSupport::Duration.build(time_in_seconds).parts
+
+    minutes = if parts[:minutes] > 0
+                (parts[:minutes].to_f / 60.0).round(2)
+              else
+                0
+              end
+
+    parts[:hours] + minutes
+  end
+
   def base_struct
-    @base_struct ||= { entries: {} }.with_indifferent_access
+    @base_struct ||= { 
+      entries: {
+        total_time: build_total_time
+      } 
+    }.with_indifferent_access
   end
 
   def structure

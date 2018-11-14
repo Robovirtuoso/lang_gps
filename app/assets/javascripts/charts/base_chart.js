@@ -2,6 +2,7 @@ class BaseChart {
   constructor(options) {
     this.$el = options.$el;
     this.entries = options.entries;
+    this.totalTime = options.totalTime;
 
     // bindings
     this.chart = _.bind(this.chart, this);
@@ -26,6 +27,11 @@ class BaseChart {
     let entry = this.getData(this.entries);
     data.addRows(entry);
     this.chart().draw(data, this.chartOptions);
+
+    this.$el.siblings('.total-time')
+      .addClass('display')
+      .find('.time')
+      .text(this.totalTime);
 
     return this;
   }

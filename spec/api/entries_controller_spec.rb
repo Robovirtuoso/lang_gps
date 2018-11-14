@@ -34,6 +34,7 @@ RSpec.describe '/api/entries/', type: :request do
       # Expect JSON to look like:
       # {
       #   entries: {
+      #     total_time: 2,
       #     langauges: {
       #       spanish: {
       #         id: 1,
@@ -63,6 +64,8 @@ RSpec.describe '/api/entries/', type: :request do
 
       expect(res).to have_key "entries"
       entry = Entry.first
+
+      expect(res["entries"]["total_time"]).to eq 2
 
       res_lang = res["entries"]["languages"][language.name]
       expect(res_lang["total_time"]).to eq 2

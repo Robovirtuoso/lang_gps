@@ -34,26 +34,29 @@
         <div id='chart-view'>
           <div class='card-columns'>
 
-            <div class='card'>
+            <div class='card study-habits'>
               <h5 class='card-header'>How You Study</h5>
               <div class='card-body'>
+                <p class='total-time'>Total Study Time: <span class='time'></span></p>
                 <div id='language-chart'>
                 </div>
               </div>
             </div>
 
-            <div class='card'>
+            <div class='card multi-lingual'>
               <h5 class='card-header'>What You Study</h5>
               <div class='card-body'>
+                <p class='total-time'>Total Study Time: <span class='time'></span></p>
                 <div id='multi-language-chart'>
                 </div>
               </div>
             </div>
 
             <% @languages.each do |language| %>
-              <div class='card'>
+              <div class='card language-<%=language.id%>'>
                 <h5 class='card-header'><%= language.name %></h5>
                 <div class='card-body'>
+                  <p class='total-time'>Total Study Time: <span class='time'></span></p>
                   <div id=<%="language-#{language.id}-chart"%>>
                     <div class='no-data-filler'><p>No data has been recorded for this language. Try adding a new entry.</p></div>
                   </div>

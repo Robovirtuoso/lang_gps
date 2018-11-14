@@ -23,12 +23,14 @@ Controllers.ChartController = class ChartController {
     }).done((entries) => {
       new StudyHabitChart({
         $el: $el.find('#language-chart'),
-        entries: entries["entries"]
+        entries: entries["entries"],
+        totalTime: entries["entries"]["total_time"]
       }).render();
 
       new MultiLingualChart({
         $el: $el.find('#multi-language-chart'),
-        entries: entries["entries"]
+        entries: entries["entries"],
+        totalTime: entries["entries"]["total_time"]
       }).render();
 
       for (let name in entries.entries.languages) {
@@ -36,7 +38,8 @@ Controllers.ChartController = class ChartController {
 
         new LanguageChart({
           $el: $el.find(`#language-${language.id}-chart`),
-          entries: language.study_habits
+          entries: language.study_habits,
+          totalTime: language.total_time
         }).render();
       }
 
