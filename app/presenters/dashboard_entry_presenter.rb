@@ -15,13 +15,7 @@ class DashboardEntryPresenter
   end
 
   def study_time
-    parts = ActiveSupport::Duration.build(entry.duration).parts
-
-    if entry.duration >= 3600
-      "#{parts[:hours]} Hour".pluralize(parts[:hours])
-    else
-      "#{parts[:minutes]} Minute".pluralize(parts[:minutes])
-    end
+    TimeConverter.stringify(entry.duration)
   end
 
 end

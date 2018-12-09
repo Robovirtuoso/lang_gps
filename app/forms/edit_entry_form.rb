@@ -44,24 +44,19 @@ class EditEntryForm
 
   def duration_type
     @duration_type || begin
-      if entry.duration >= 3600
-        "Hours"
-      else
-        "Minutes"
-      end
+      TimeConverter.exceeds_hour?(entry.duration,
+        true: -> {
+          "Hours"
+        },
+        false: -> {
+          "Minutes"
+        }
+      )
     end
   end
 
   def duration
-    @duration || begin
-      parts = ActiveSupport::Duration.build(entry.duration).parts
-
-      if entry.duration >= 3600
-        parts[:hours]
-      else
-        parts[:minutes]
-      end
-    end
+    @duration || TimeConverter.numerify(entry.duration)
   end
 
   private
@@ -76,13 +71,7 @@ class EditEntryForm
   end
 
   def study_time
-    parts = ActiveSupport::Duration.build(entry.duration).parts
-
-    if entry.duration >= 3600
-      "#{parts[:hours]} Hour(s)"
-    else
-      "#{parts[:minutes]} Minute(s)"
-    end
+    TimeConverter.stringify(entry.duration)
   end
 
 end

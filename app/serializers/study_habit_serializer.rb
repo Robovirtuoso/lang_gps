@@ -39,22 +39,7 @@ class StudyHabitSerializer
 
   private
 
-  # This method convert seconds into hours
-  # If a duration is less than an hour (ie. 30 mins, 15 mins)
-  # It will be converted into a float to represent its hour value
-  #
-  #   1800 (sec) => 30 minutes => 0.5 hours
-  #   2700 (sec) => 45 minutes => 0.75 hours
-  #
   def formatted_duration(time_in_seconds)
-    parts = ActiveSupport::Duration.build(time_in_seconds).parts
-
-    minutes = if parts[:minutes] > 0
-                (parts[:minutes].to_f / 60.0).round(2)
-              else
-                0
-              end
-
-    parts[:hours] + minutes
+    TimeConverter.to_hours(time_in_seconds)
   end
 end
