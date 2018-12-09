@@ -33,8 +33,10 @@ RSpec.describe '/api/language_users/:user_id', type: :request do
       get "/api/language_users/", headers: headers
 
       expect(res.count).to equal 2
-      expect(res[0]["name"]).to eq language.name
-      expect(res[1]["name"]).to eq language2.name
+      names = res.map { |lang| lang["name"] }
+
+      expect(names).to include language.name
+      expect(names).to include language2.name
     end
 
     it 'returns empty array when no languages exist' do
