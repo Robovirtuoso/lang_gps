@@ -14,4 +14,8 @@ class MultiLingualChart extends BaseChart {
 
     return data;
   }
+
+  chartType() {
+    return "PieChart";
+  }
 }

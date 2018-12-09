@@ -9,4 +9,8 @@ class LanguageChart extends BaseChart {
   getData(collection) {
     return _.toPairs(collection);
   }
+
+  chartType() {
+    return "PieChart";
+  }
 }

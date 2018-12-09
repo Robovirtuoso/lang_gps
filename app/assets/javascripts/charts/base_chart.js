@@ -20,7 +20,7 @@ class BaseChart {
 
     var columns = this.columns();
     for (let type in columns) {
-      data.addColumn(type, columns[type])
+      data.addColumn({ type: type, id: columns[type] })
     }
 
     let entry = this.getData(this.entries);
@@ -30,8 +30,14 @@ class BaseChart {
     return this;
   }
 
+  chartType() {
+    throw new Error("Chart must implement `chartType` method returning a string value of the type of Google chart to be rendered");
+  }
+
   chart() {
-    return new google.visualization.PieChart(this.$el[0]);
+    let type = this.chartType();
+    // ie. PieChart, Calendar, etc.
+    return new google.visualization[type](this.$el[0]);
   }
 }
 

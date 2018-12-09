@@ -8,7 +8,7 @@ Controllers.ChartController = class ChartController {
   }
 
   render() {
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['calendar', 'corechart']});
     google.charts.setOnLoadCallback(this.renderChart);
     return this;
   }
@@ -28,6 +28,11 @@ Controllers.ChartController = class ChartController {
 
       new MultiLingualChart({
         $el: $el.find('#multi-language-chart'),
+        entries: entries["entries"]
+      }).render();
+
+      new ProgressChart({
+        $el: $el.find('#progress-chart'),
         entries: entries["entries"]
       }).render();
 

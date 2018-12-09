@@ -20,4 +20,8 @@ class StudyHabitChart extends BaseChart {
 
     return data;
   }
+
+  chartType() {
+    return "PieChart";
+  }
 }

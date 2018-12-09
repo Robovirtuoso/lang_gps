@@ -30,6 +30,7 @@ class EntriesSerializer
     end
 
     serializers << LanguageSerializer.new(entries.by_language)
+    serilizers << AllSerializer.new(entries)
 
     serializers.each do |serializer|
       base_struct[:entries].merge!(serializer)
