@@ -4,8 +4,9 @@ class EntryForm
   attr_accessor :language_studied, :user, :study_habit, 
                 :notes, :entries
 
-  ## Refactor
-  # Is there a better way to express this validation behavior?
+  # This form accepts attributes to create multiple entry objects.
+  # This validation loops over each entry verifying that they are all
+  # valid.
 
   validates_each :entries do |record, attr, value|
     Array(value).each { |entry|
@@ -13,16 +14,10 @@ class EntryForm
     }
   end
 
-  ## /end_refactor
-
   validates :entries, presence: true, length: { maximum: 4 }
 
   validates :language_studied, presence: true
   validates :user, presence: true
-
-  # should this object validate that the user object
-  # passed in responds to `#languages` ?
-  # Or should it validate that it is an AR User model?
 
   def save
     return false unless valid?

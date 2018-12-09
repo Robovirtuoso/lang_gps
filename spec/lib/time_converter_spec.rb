@@ -37,14 +37,6 @@ RSpec.describe TimeConverter do
     end
   end
 
-  describe '.convert' do
-    it 'returns time in minutes if under an hour' do
-    end
-
-    it 'returns time in hours if over an hour' do
-    end
-  end
-
   describe '.numerify' do
     it 'converts 5400 to 1.5' do
       str = TimeConverter.numerify(5400)
