@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: lang_gps_development
+
+test:
+  <<: *default
+  database: lang_gps_test
+
+production:
+  <<: *default
+  database: lang_gps_production
+  username: lang_gps
+  password: <%= ENV['LANG_GPS_DATABASE_PASSWORD'] %>
