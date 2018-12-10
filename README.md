@@ -1,24 +1,37 @@
-# README
+# lang_gps
+`lang_gps` is an application for recording your language learning progress.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Ideology
+When studying a foreign language there are four main categories for which you will need to practice.
 
-Things you may want to cover:
+  * listening
+  * reading
+  * writing
+  * speaking
 
-* Ruby version
+As you are on your path to fluency in any given language you want to ensure that your study habits
+involve a balanced allocation of time between these four methods. If every day you only practice reading
+you will never improve your listening ability.
 
-* System dependencies
+`lang_gps` is meant to provide you with tracking functionality that helps you shape the way you study.
 
-* Configuration
+## Using the App
+After logging into the app, select the language(s) you wish to study from the pop-up modal and then click the `New Entry` link.
+Enter in your study time for the day and then watch as your progress evolves daily.
 
-* Database creation
+## Server
+After pulling down the code simply run the following command to get setup.
 
-* Database initialization
+`./bin/setup`
 
-* How to run the test suite
+## Dev Server
+The dev server for this app can be found at: [https://lang-gps-dev.herokuapp.com/](https://lang-gps-dev.herokuapp.com/)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Testing
 
-* Deployment instructions
+`rspec` is the testing framework used for rails while `mocha` is used for javascript with `teaspoon` being the runner.
 
-* ...
+`bundle exec rspec spec/`
+`bundle exec teaspoon`
+
+JS specs can also be executed by running the server and navigating to `localhost:3000/teaspoon`
