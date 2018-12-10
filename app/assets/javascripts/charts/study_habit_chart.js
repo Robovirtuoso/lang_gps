@@ -1,4 +1,4 @@
-class StudyHabitChart extends BaseChart {
+App.StudyHabitChart = class StudyHabitChart extends App.BaseChart {
   columns() {
     return {
       string: 'Study Habit',

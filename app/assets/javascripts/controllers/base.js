@@ -1,2 +1,5 @@
 // Namespace for controllers
-const Controllers = {};
+(function() {
+  const Controllers = {};
+  App.Controllers = Controllers;
+})();

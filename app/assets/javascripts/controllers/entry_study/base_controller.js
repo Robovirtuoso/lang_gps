@@ -1,9 +1,9 @@
-class EntryStudyBaseController {
+App.EntryStudyBaseController = class EntryStudyBaseController {
   constructor(el) {
     this.el = el;
     this.$el = $(el);
 
-    this.buttonState = new ButtonState({
+    this.buttonState = new App.ButtonState({
       $el: this.$el.find('.form-control'),
       $input: this.$el.find('#study_habit_' + this.habitType())
     });

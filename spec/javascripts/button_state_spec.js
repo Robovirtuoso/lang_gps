@@ -1,12 +1,12 @@
 //= require button_state
 //= require jquery
 
-describe("ButtonState", () => {
+describe("App.ButtonState", () => {
 
   describe(".constructor()", () => {
     it("throws an error if all arguments aren't provided", () => {
       try {
-        new ButtonState();
+        new App.ButtonState();
         sinon.assert.fail("no error thrown");
       } catch (e) {
         expect(e.message).to.contain("Missing arguments: $el,$input");
@@ -15,14 +15,14 @@ describe("ButtonState", () => {
 
     it("throws an error if only one arguments is provided", () => {
       try {
-        new ButtonState({ $el: "" });
+        new App.ButtonState({ $el: "" });
         sinon.assert.fail("no error thrown");
       } catch (e) {
         expect(e.message).to.contain("Missing arguments: $input");
       }
 
       try {
-        new ButtonState({ $input: "" });
+        new App.ButtonState({ $input: "" });
         sinon.assert.fail("no error thrown");
       } catch (e) {
         expect(e.message).to.contain("Missing arguments: $el");
@@ -38,7 +38,7 @@ describe("ButtonState", () => {
     });
 
     it("disables the element", () => {
-      let button = new ButtonState({
+      let button = new App.ButtonState({
         $el: $('#test_button'),
         $input: $('[name="email"]')
       });
@@ -48,7 +48,7 @@ describe("ButtonState", () => {
     });
 
     it("it removes disable attr when input is filled", () => {
-      let button = new ButtonState({
+      let button = new App.ButtonState({
         $el: $('#test_button'),
         $input: $('[name="email"]')
       });
@@ -63,7 +63,7 @@ describe("ButtonState", () => {
     });
 
     it("adds the disable attr when input is filled and then emptied", () => {
-      let button = new ButtonState({
+      let button = new App.ButtonState({
         $el: $('#test_button'),
         $input: $('[name="email"]')
       });
@@ -78,7 +78,7 @@ describe("ButtonState", () => {
 
     context("handles checkboxes", () => {
       it("is disabled when no checkbox is selected", () => {
-        let button = new ButtonState({
+        let button = new App.ButtonState({
           $el: $('#test_button'),
           // a group of checkboxes
           $input: $('[name="[car][]"]')
@@ -89,7 +89,7 @@ describe("ButtonState", () => {
       });
 
       it("enables button when at least one checkbox is selected", () => {
-        let button = new ButtonState({
+        let button = new App.ButtonState({
           $el: $('#test_button'),
           // a group of checkboxes
           $input: $('[name="[car][]"]')
@@ -102,7 +102,7 @@ describe("ButtonState", () => {
       });
 
       it("stays enabled when multiple are selected", () => {
-        let button = new ButtonState({
+        let button = new App.ButtonState({
           $el: $('#test_button'),
           // a group of checkboxes
           $input: $('[name="[car][]"]')
@@ -116,7 +116,7 @@ describe("ButtonState", () => {
       });
 
       it("disables if selected and then deselected", () => {
-        let button = new ButtonState({
+        let button = new App.ButtonState({
           $el: $('#test_button'),
           // a group of checkboxes
           $input: $('[name="[car][]"]')

@@ -1,4 +1,4 @@
-class MultiLingualChart extends BaseChart {
+App.MultiLingualChart = class MultiLingualChart extends App.BaseChart {
   columns() {
     return {
       string: 'Language',

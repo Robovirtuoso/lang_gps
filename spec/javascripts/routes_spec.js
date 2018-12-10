@@ -8,30 +8,30 @@ describe("routes", () => {
   });
 
   afterEach(() => {
-    delete Controllers.TestController;
+    delete App.Controllers.TestController;
   });
 
-  describe("RouteTemplate#call()", () => {
+  describe("App.RouteTemplate#call()", () => {
     it("instantiates a controller based on a view element with corresponding id", () => {
       let spy = sinon.spy();
 
-      Controllers.TestController = class TestController {
+      App.Controllers.TestController = class TestController {
         render() {
           spy();
         }
       }
 
-      let route = new RouteTemplate();
+      let route = new App.RouteTemplate();
       route.call();
 
       expect(spy.called).to.be(true);
     });
 
     it("throws an error when `render` function is missing", () => {
-      Controllers.TestController = class TestController {
+      App.Controllers.TestController = class TestController {
       };
       
-      let route = new RouteTemplate();
+      let route = new App.RouteTemplate();
 
       try {
         route.call();
@@ -43,17 +43,17 @@ describe("routes", () => {
 
   });
 
-  describe("RouteTemplate#controllerName(viewId)", () => {
+  describe("App.RouteTemplate#controllerName(viewId)", () => {
     it("returns the controller class for a view", () => {
       let testObj = (function() {});
-      Controllers.TestController = testObj;
+      App.Controllers.TestController = testObj;
 
-      let route = new RouteTemplate();
+      let route = new App.RouteTemplate();
       expect(route.controllerName('test-view')).to.be(testObj);
     });
 
     it("throws an error when a controller doesn't exist for given viewId", () => {
-      let route = new RouteTemplate();
+      let route = new App.RouteTemplate();
       
       try {
         route.controllerName('nonexistent-view');

@@ -9,7 +9,7 @@ describe("DashboardController", () => {
     after(() => { this.server.restore(); });
 
     it("forwards server data to a callback", () => {
-      let cont = new Controllers.DashboardController();
+      let cont = new App.Controllers.DashboardController();
       let serverData = [{ id: 1, name: 'French' }];
 
       let exp = sinon.mock(cont)
@@ -37,7 +37,7 @@ describe("DashboardController", () => {
     });
 
     it("returns true when data is present", () => {
-      let cont = new Controllers.DashboardController();
+      let cont = new App.Controllers.DashboardController();
       let data = [{ name: 'French', id: 1 }];
 
       expect(cont.validateLanguage(data)).to.equal(true);
@@ -46,7 +46,7 @@ describe("DashboardController", () => {
     it("opens #language-form modal when no data is present", () => {
       $('.modal').prop('id', 'language-form');
 
-      let cont = new Controllers.DashboardController();
+      let cont = new App.Controllers.DashboardController();
       let exp = sinon.mock(cont.$modal).expects("modal");
 
       cont.validateLanguage([]);

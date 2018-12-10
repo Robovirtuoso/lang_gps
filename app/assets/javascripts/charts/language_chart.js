@@ -1,4 +1,4 @@
-class LanguageChart extends BaseChart {
+App.LanguageChart = class LanguageChart extends App.BaseChart {
   columns() {
     return {
       string: 'Study Habit',

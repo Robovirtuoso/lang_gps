@@ -7,7 +7,7 @@ describe("LanguageUsers", () => {
 
   describe("fetch()", () => {
     it("calls the server for languages for current_user", () => {
-      let lang = new LanguageUsers();
+      let lang = new App.LanguageUsers();
 
       let langPromise = lang.fetch();
 

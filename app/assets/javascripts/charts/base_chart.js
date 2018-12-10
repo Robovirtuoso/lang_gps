@@ -1,4 +1,4 @@
-class BaseChart {
+App.BaseChart = class BaseChart {
   constructor(options) {
     this.$el = options.$el;
     this.entries = options.entries;
@@ -35,6 +35,6 @@ class BaseChart {
   }
 }
 
-BaseChart.prototype.chartOptions = {
+App.BaseChart.prototype.chartOptions = {
   width: 350
 }

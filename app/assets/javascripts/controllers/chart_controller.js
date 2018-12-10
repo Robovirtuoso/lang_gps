@@ -1,4 +1,4 @@
-Controllers.ChartController = class ChartController {
+App.Controllers.ChartController = class ChartController {
   constructor(el) {
     this.el = el;
     this.chartEl = $(this.el).find('#language-chart')[0];
@@ -21,12 +21,12 @@ Controllers.ChartController = class ChartController {
       method: 'GET',
       dataType: 'JSON'
     }).done((entries) => {
-      new StudyHabitChart({
+      new App.StudyHabitChart({
         $el: $el.find('#language-chart'),
         entries: entries["entries"]
       }).render();
 
-      new MultiLingualChart({
+      new App.MultiLingualChart({
         $el: $el.find('#multi-language-chart'),
         entries: entries["entries"]
       }).render();
@@ -34,7 +34,7 @@ Controllers.ChartController = class ChartController {
       for (let name in entries.entries.languages) {
         let language = entries.entries.languages[name];
 
-        new LanguageChart({
+        new App.LanguageChart({
           $el: $el.find(`#language-${language.id}-chart`),
           entries: language.study_habits
         }).render();

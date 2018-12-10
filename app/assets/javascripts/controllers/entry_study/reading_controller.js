@@ -1,4 +1,4 @@
-Controllers.EntryStudyReadingController = class EntryStudyReadingController extends EntryStudyBaseController {
+App.Controllers.EntryStudyReadingController = class EntryStudyReadingController extends App.EntryStudyBaseController {
   habitType() {
     return "reading";
   }
